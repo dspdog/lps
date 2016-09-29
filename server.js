@@ -36,7 +36,7 @@ var getPlateOutputForImage = function(picurl, cb){
 
                 setTimeout(function(){
                     cb(stdout + " ok");
-                }, 4000);
+                }, 0);
 
             });
 
