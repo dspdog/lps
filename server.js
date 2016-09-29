@@ -4,8 +4,8 @@ var http = require('http');
 var request = require('request');
 var util = require('util');
 
-//var exec = require('child_process').exec;
-var exec = require('exec');
+var exec = require('child_process').exec;
+//var exec = require('exec');
 
 if (!String.prototype.format) {
     String.prototype.format = function() {
@@ -22,33 +22,22 @@ if (!String.prototype.format) {
 var getPlateOutputForImage = function(picurl, cb){
 
     var file = picurl.substring(picurl.lastIndexOf('/')+1);
+    var cmd = "wget {0}".format(picurl);
 
-    exec(['wget {0} && docker run -it --rm -v $(pwd):/data:ro openalpr -c eu {1}'.format(picurl, file)], function(err, out, code) {
-
-        process.stderr.write(err);
-        process.stdout.write(out);
-        process.exit(code);
-
-        console.log(out);
-
-        setTimeout(function(){
-            cb("okok");
-        },2000);
-    });
-
-   /* exec(cmd, function(error, stdout, stderr) {
-        console.log("OUT1",util.inspect(stdout));
+    exec(cmd, function(error, stdout, stderr) {
+        console.log(stdout);
 
         cmd = 'docker run -it --rm -v $(pwd):/data:ro openalpr -c eu {0}'.format(file);
-
         console.log("CMD2",cmd);
+        setTimeout(function(){
+            exec(cmd, function(error, stdout, stderr) {
+                // command output is in stdout
+                console.log("OUT2",util.inspect(stdout));
+                cb("okokok");
+            });
+        }, 4000);
 
-        exec(cmd, function(error, stdout, stderr) {
-            // command output is in stdout
-            console.log("OUT2",util.inspect(stdout));
-            cb(stdout);
-        });
-    });*/
+    });
 }
 
 var server = http.createServer(function(req, res) {
