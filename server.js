@@ -27,7 +27,7 @@ var getPlateOutputForImage = function(picurl, cb){
     exec(cmd, function(error, stdout, stderr) {
         console.log(stdout);
 
-        cmd = 'docker run -it --rm -v $(pwd):/data:ro openalpr -c eu {0}'.format(file);
+        cmd = 'docker run -i --rm -v $(pwd):/data:ro openalpr -c eu {0}'.format(file);
         console.log("CMD2",cmd);
 
             exec(cmd, function(error, stdout, stderr) {
