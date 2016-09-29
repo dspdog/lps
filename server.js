@@ -30,11 +30,11 @@ var getPlateOutputForImage = function(picurl, cb){
         cmd = 'docker run -it --rm -v $(pwd):/data:ro openalpr -c eu {0}'.format(file);
 
         console.log("CMD2",cmd);
-        console.log("OUT1",stdout);
+        console.log("OUT1",util.inspect(stdout));
 
         exec(cmd, function(error, stdout, stderr) {
             // command output is in stdout
-            console.log("OUT2",stdout);
+            console.log("OUT2",util.inspect(stdout));
             cb(stdout);
         });
     });
