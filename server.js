@@ -19,12 +19,15 @@ if (!String.prototype.format) {
 }
 
 var getPlateOutputForImage = function(picurl, cb){
-    var cmd = 'wget {0} -o lp.jpg'.format(picurl);
+
+    var file = url.substring(picurl.lastIndexOf('/')+1);
+
+    var cmd = 'wget {0}'.format(picurl);
     console.log("CMD1",cmd);
 
     exec(cmd, function(error, stdout, stderr) {
 
-        cmd = 'docker run -it --rm -v $(pwd):/data:ro openalpr -c eu lp.jpg';
+        cmd = 'docker run -it --rm -v $(pwd):/data:ro openalpr -c eu {0}'.format(file);
 
         console.log("CMD2",cmd);
         console.log("OUT1",stdout);
