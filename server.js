@@ -29,13 +29,17 @@ var getPlateOutputForImage = function(picurl, cb){
 
         cmd = 'docker run -it --rm -v $(pwd):/data:ro openalpr -c eu {0}'.format(file);
         console.log("CMD2",cmd);
-        setTimeout(function(){
+
             exec(cmd, function(error, stdout, stderr) {
                 // command output is in stdout
                 console.log(stdout);
-                cb("okokok");
+
+                setTimeout(function(){
+                    cb(stdout + " ok");
+                }, 4000);
+
             });
-        }, 4000);
+
 
     });
 }
