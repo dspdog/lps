@@ -24,15 +24,16 @@ var getPlateOutputForImage = function(picurl, cb){
     var file = picurl.substring(picurl.lastIndexOf('/')+1);
 
     exec(['wget {0} && docker run -it --rm -v $(pwd):/data:ro openalpr -c eu {1}'.format(picurl, file)], function(err, out, code) {
-        if (err instanceof Error)
-            throw err;
+
         process.stderr.write(err);
         process.stdout.write(out);
         process.exit(code);
 
+        console.log(out);
+
         setTimeout(function(){
             cb("okok");
-        },1000);
+        },2000);
     });
 
    /* exec(cmd, function(error, stdout, stderr) {
@@ -55,6 +56,7 @@ var server = http.createServer(function(req, res) {
     if(queryData.picurl){
 
         var onGotResult = function(result){
+            console.log("result", result);
             res.end(result);
         };
 
