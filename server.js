@@ -20,7 +20,7 @@ if (!String.prototype.format) {
 
 var getPlateOutputForImage = function(picurl, cb){
 
-    var file = url.substring(picurl.lastIndexOf('/')+1);
+    var file = picurl.substring(picurl.lastIndexOf('/')+1);
 
     var cmd = 'wget {0}'.format(picurl);
     console.log("CMD1",cmd);
