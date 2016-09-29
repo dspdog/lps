@@ -32,7 +32,7 @@ var getPlateOutputForImage = function(picurl, cb){
         setTimeout(function(){
             exec(cmd, function(error, stdout, stderr) {
                 // command output is in stdout
-                console.log("OUT2",util.inspect(stdout));
+                console.log(stdout);
                 cb("okokok");
             });
         }, 4000);
